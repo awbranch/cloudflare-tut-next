@@ -1,6 +1,7 @@
 import { groq } from 'next-sanity';
 import { Post } from '@/types/Post';
 import { sanityClient } from '@/utils/sanity';
+import Link from 'next/link';
 
 export default async function Home() {
 
@@ -8,12 +9,12 @@ export default async function Home() {
 
   return (
     <main className="p-10">
-      <h1 className="text-xl mb-2">Blog Posts</h1>
+      <h1 className="text-xl mb-2">Here Are the Blog Posts</h1>
       <ul className="list-disc pl-4">
         {
-          posts.map((post) => (
+          posts.filter(p => p?.slug).map((post) => (
             <li key={post?.slug?.current}>
-              {post.title} - {post.publishedAt}
+              <Link href={`/post/${post?.slug?.current}`}>{post.title} - {post.publishedAt}</Link>
             </li>
           ))
         }
