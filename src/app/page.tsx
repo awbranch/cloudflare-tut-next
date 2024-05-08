@@ -1,11 +1,11 @@
 import { groq } from 'next-sanity';
 import { Post } from '@/types/Post';
-import { sanityClient } from '@/utils/sanity';
+import { client } from '@/utils/sanity';
 import Link from 'next/link';
 
 export default async function Home() {
 
-  const posts = await sanityClient.fetch<Post[]>(`*[_type == "post"]`)
+  const posts = await client.fetch<Post[]>(`*[_type == "post"]`)
 
   return (
     <main className="p-10">
